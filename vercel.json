@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "functions": {
+    "app.py": {
+      "excludeFiles": "{.venv/**,dtown-issue-map/.venv/**,dtown-issue-map/data/archive/**,dtown-issue-map/server.stdout.log,dtown-issue-map/server.stderr.log,dtown-issue-map/vercel.json}"
+    }
+  }
+}

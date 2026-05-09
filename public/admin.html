@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue Map Admin</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="./static/images/dkri-mini-logo-symbol.png?v=2">
+  <link rel="shortcut icon" href="./static/images/dkri-mini-logo-symbol.png?v=2">
+  <link rel="stylesheet" href="./static/css/styles.css">
+</head>
+<body class="admin-shell">
+  <header class="hero hero--admin">
+    <div class="hero__branding">
+      <img class="hero__logo hero__logo--round hero__logo--small" src="./static/images/our-city-kingston.png" alt="Our City Kingston logo">
+      <div class="hero__copy">
+        <p class="eyebrow">Admin Portal</p>
+        <h1>Update Issue Statuses and Replace KML</h1>
+        <p class="hero__text">
+          Use this page to keep map statuses accurate and swap in a new KML file without touching code.
+        </p>
+      </div>
+    </div>
+    <div class="hero__partner">
+      <img class="hero__logo hero__logo--partner" src="./static/images/dkri-colour-logo.png" alt="DKRI logo">
+      <a class="button button--ghost" href="./index.html">Back to Map</a>
+    </div>
+  </header>
+
+  <main class="admin-layout">
+    <section class="card">
+      <div class="card__header">
+        <h2>Replace KML</h2>
+        <p>Upload a new KML export. Existing statuses are preserved where point IDs or names still match.</p>
+      </div>
+      <form id="kml-upload-form" class="stack-form">
+        <input id="kml-file" type="file" accept=".kml,application/vnd.google-earth.kml+xml" required>
+        <button class="button" type="submit">Upload KML</button>
+      </form>
+      <p class="form-message" id="kml-message"></p>
+    </section>
+
+    <section class="card card--editor">
+      <div class="card__header">
+        <h2>Edit Point Status</h2>
+        <p>Select a point from the table, then update its status and notes.</p>
+      </div>
+      <form id="status-form" class="stack-form">
+        <input id="issue-id" type="hidden">
+        <label>
+          <span>Issue point</span>
+          <input id="issue-name" type="text" readonly>
+        </label>
+        <label>
+          <span>Status</span>
+          <select id="issue-status">
+            <option value="pending">Pending</option>
+            <option value="down">Down</option>
+            <option value="fixed">Fixed</option>
+          </select>
+        </label>
+        <label>
+          <span>Reported by / updated by</span>
+          <input id="issue-reported-by" type="text" placeholder="Optional name or team">
+        </label>
+        <label>
+          <span>Notes</span>
+          <textarea id="issue-notes" rows="5" placeholder="Add context, repair notes, or escalation details"></textarea>
+        </label>
+        <button class="button" type="submit">Save Status</button>
+      </form>
+      <p class="form-message" id="status-message"></p>
+    </section>
+
+    <section class="card card--table">
+      <div class="card__header">
+        <h2>Current Points</h2>
+        <p>Search points and click any row to load it into the editor.</p>
+      </div>
+      <div class="toolbar">
+        <input id="search-input" type="search" placeholder="Search by point name">
+        <select id="status-filter">
+          <option value="all">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="down">Down</option>
+          <option value="fixed">Fixed</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Point</th>
+              <th>Status</th>
+              <th>Updated</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="issues-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="./static/js/admin.js"></script>
+</body>
+</html>
